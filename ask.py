@@ -6,7 +6,7 @@ import datetime
 
 ask = Blueprint('ask', __name__, template_folder='templates') 
 
-@ask.route('/ask', methods=['POST')  
+@ask.route('/addgoal', methods=['POST')  
 #@login_required
 def add_goals(): 
 	if request.method == 'POST': 
@@ -23,9 +23,10 @@ def add_goals():
 		db.session.add(new_goal)
 		db.session.commit() 
 
-		question_id = get_question_id(new_question, db)
+	return 
+		#user_id = get_goal_id(new_goal, db)
 
-		return redirect(url_for('questions.show_question', question_id=question_id))
+		#return redirect(url_for('questions.show_question', question_id=question_id))
 
 	#elif request.method == 'GET': 
 	#	return render_template('ask.html')
