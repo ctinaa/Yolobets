@@ -4,49 +4,53 @@ db = SQLAlchemy()
 
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	userid = db.Column(db.Integer, db.ForeignKey('user.id'))
-	firstname = db.Column(db.String(30))
-	lastname = db.Column(db.String(30))
-	username = db.Column(db.String(30), unique=True)
+	userId = db.Column(db.Integer, db.ForeignKey('user.id'))
+	firstName = db.Column(db.String(30))
+	lastName = db.Column(db.String(30))
+	userName = db.Column(db.String(30), unique=True)
 	email = db.Column(db.String(30), unique=True)
 	password = db.Column(db.String(30), unique = True)
-	pointvalue = db.Column(db.Integer)
+	pointValue = db.Column(db.Integer)
+	totalPoints = db.Column(db.Inteher)
+	quote = db.Column(db.String(30))
 	level = db.Column(db.Integer)
 	image = db.Column(db.String(100))
 	badge = db.Badge(db.Strint(100))
 
-	def __init__(self, firstname, lastname, username, email, 
-		password, pointvalue, level, image, badge):
-		self.firstname = firstname
-		self.lastname = lastname
+	def __init__(self, firstName, lastName, username, email, 
+		password, pointValue, totalPoints, quote, level, image, badge):
+		self.firstName = firstname
+		self.lastName = lastname
 		self.username = username
 		self.email = email
 		self.password = password 
-		self.pointvalue = pointvalue 
+		self.pointValue = pointvalue 
 		self.level = level
+		self.totalPoints = totalPoints
+		self.quote = quote
 		self.image = image 
 		self.badge = badge 
 
 
 class  Goal(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	userid = db.Column(db.Integer, db.ForeignKey('user.id'))
-	goal_one = db.Column(db.TEXT)
-	goal_two = db.Column(db.TEXT)
-	goal_three = db.Column(db.TEXT)
-	duedate = db.Column(DATETIME)
-	
-	def __init__(self, userid, goal_one, goal_two, goal_three, duedate):
-		self.userid = user_id
-		self.goal_one =  goal_one
-		self.goal_two = goal_two
-		self.goal_three = goal_three 
-		self.duedate = duedate
+	userId = db.Column(db.Integer, db.ForeignKey('user.id'))
+	goalOne = db.Column(db.TEXT)
+	goalTwo = db.Column(db.TEXT)
+	goalThree = db.Column(db.TEXT)
+	duedate = db.Column(DateTime)
+	timeStamp = db.Column(DateTime)
+	def __init__(self, userId, goalOne, goalTwo, goalThree, dueDate):
+		self.userId = userId
+		self.goalOne =  goalOne
+		self.goalTwo = goalTwo
+		self.goalThree = goalThree 
+		self.dueDate = dueDate
 
 class  Challenge(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	challengerid = db.Column(db.Integer, db.ForeignKey('user.id'))
-	opponentid = db.Column(db.Integer, db.ForeignKey('user.id'))
+	challengerId = db.Column(db.Integer, db.ForeignKey('user.id'))
+	opponentId = db.Column(db.Integer, db.ForeignKey('user.id'))
 	isCompleted = db.Column(db.tinyint(1))
 	
 	def __init__(self, challengerid, opponentid, isCompleted):

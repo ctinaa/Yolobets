@@ -21,34 +21,46 @@ db.init_app(app)
 with app.app_context():
 	db.create_all()
 	db.session.commit() 
-'''
+
 @app.route('/')
-def home(): 
+def login(): 
 	return render_template('index.html')
 
 
-@app.route('/login')
-def login():
-	return render_template('login3.html')
+@app.route('/goalSetting')
+def goalSetting():
+	return render_template('goalSetting.html')
 
-@app.route('/signin')
-def signin():
-    return render_template('signin.html')
-
-@app.route('/signon')
-def signon():
-    return render_template('signon.html')
-
+@app.route('/liveFeed')
+def liveFeed():
+    return render_template('liveFeed.html')
 
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
 
+@app.route('/addacount', methods=['GET','POST'])  
+#@login_required
+def add_goals(): 
+    if request.method == 'POST': 
+        new_goal = Goal(session['userid'],
+            request.form['goalone'],
+            request.form['goaltwo'],
+            request.form['goalthree'],
+            request.form['duedate']
+            #request.form[''],
+            #request.form['email'],  
+            datetime.datetime.now(), 
+            datetime.datetime.now())
 
-@app.route('/howitworks')
-def howitworks():
-    return render_template('howitworks.html')
+        db.session.add(new_goal)
+        db.session.commit() 
+        return render_template('index.html')
 
+    else: 
+        return render_template('index.html')
+
+'''
 @app.route('/fb_test')
 def fb(): 
 	data = facebook.get('/me').data

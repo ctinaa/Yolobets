@@ -37,3 +37,35 @@ def add_goals():
 def get_question_id(record, db): 
 	db.session.refresh(record)
 	return record.ID
+
+@ask.route('/addacount', methods=['POST')  
+#@login_required
+def add_goals(): 
+	if request.method == 'POST': 
+		new_goal = Goal(session['userid'],
+			request.form['goalone'],
+			request.form['goaltwo'],
+			request.form['goalthree'],
+			request.form['duedate']
+			#request.form[''],
+			#request.form['email'],  
+			datetime.datetime.now(), 
+			datetime.datetime.now())
+
+		db.session.add(new_goal)
+		db.session.commit() 
+	
+	
+		#user_id = get_goal_id(new_goal, db)
+
+		#return redirect(url_for('questions.show_question', question_id=question_id))
+
+	#elif request.method == 'GET': 
+	#	return render_template('ask.html')
+
+
+# Helper Functions 
+
+def get_question_id(record, db): 
+	db.session.refresh(record)
+	return record.ID
