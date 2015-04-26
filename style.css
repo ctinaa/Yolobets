@@ -1,0 +1,25 @@
+html {
+        /* Size of largest container or bigger */
+        min-width: 1044px;
+        min-height: 400px;
+    }
+
+
+.cd-scrolling-bg cd-1 {
+  position: center;
+
+}
+
+ 
+.cd-scrolling-bg {
+  min-height: 50%;
+  opacity: 0.5;
+  position:relative;
+    background: black;box-shadow: 
+}
+
+
+  /*background : rgba( #f3f3f3, 0.75 );
+  box-shadow : 0 1px 0.125em #333; */
+  
+} 
