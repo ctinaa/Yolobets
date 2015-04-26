@@ -11,11 +11,11 @@ class User(db.Model):
 	email = db.Column(db.String(30), unique=True)
 	password = db.Column(db.String(30), unique = True)
 	pointValue = db.Column(db.Integer)
-	totalPoints = db.Column(db.Inteher)
+	totalPoints = db.Column(db.Integer)
 	quote = db.Column(db.String(30))
 	level = db.Column(db.Integer)
 	image = db.Column(db.String(100))
-	badge = db.Badge(db.Strint(100))
+	badge = db.Column(db.String(100))
 
 	def __init__(self, firstName, lastName, username, email, 
 		password, pointValue, totalPoints, quote, level, image, badge):
@@ -38,8 +38,8 @@ class  Goal(db.Model):
 	goalOne = db.Column(db.TEXT)
 	goalTwo = db.Column(db.TEXT)
 	goalThree = db.Column(db.TEXT)
-	duedate = db.Column(DateTime)
-	timeStamp = db.Column(DateTime)
+	duedate = db.Column(db.DateTime)
+	timeStamp = db.Column(db.DateTime)
 	def __init__(self, userId, goalOne, goalTwo, goalThree, dueDate):
 		self.userId = userId
 		self.goalOne =  goalOne
@@ -51,7 +51,7 @@ class  Challenge(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	challengerId = db.Column(db.Integer, db.ForeignKey('user.id'))
 	opponentId = db.Column(db.Integer, db.ForeignKey('user.id'))
-	isCompleted = db.Column(db.tinyint(1))
+	isCompleted = db.Column(db.Boolean(1))
 	
 	def __init__(self, challengerid, opponentid, isCompleted):
 		self.challengerid = challengerid 

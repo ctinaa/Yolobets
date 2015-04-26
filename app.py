@@ -3,15 +3,16 @@
 from flask import * 
 from flask_oauth import OAuth
 from models import User, db 
-import sqlite3 
+# import sqlite3 
 # from sqlite3 import sqlite3
 # from models import db
 from sys import * 
 from os import *
+import datetime 
 
 connection = "mysql://%s:%s@%s:3306/%s" % (
-	'root', 'lahacks',
-	'localhost', 'homeless')
+	'root', 'admin123',
+	'localhost', 'yolo')
 
 app = Flask(__name__) 
 app.config['SQLALCHEMY_DATABASE_URI'] = connection 
@@ -47,15 +48,11 @@ def add_goals():
             request.form['goalone'],
             request.form['goaltwo'],
             request.form['goalthree'],
-            request.form['duedate']
-            #request.form[''],
-            #request.form['email'],  
-            datetime.datetime.now(), 
-            datetime.datetime.now())
+            request.form['duedate'])
 
-        db.session.add(new_goal)
-        db.session.commit() 
-        return render_template('index.html')
+    	db.session.add(new_goal)
+    	db.session.commit() 
+    	return render_template('index.html')
 
     else: 
         return render_template('index.html')
@@ -131,4 +128,4 @@ def logout():
     pop_login_session()
     return redirect(url_for('home'))
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=80, debug=True)
+	app.run(host='0.0.0.0', port=5000, debug=True)
